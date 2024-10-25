@@ -9,16 +9,35 @@ diameter = st.radio(
     "Diameter van balk (cm)", 
     options=[10, 11, 12, 13], 
     format_func=lambda x: {
+        8: "8cm",
+        9: "9cm",
         10: "10cm (gefreesde balken tot 6m)",
         11: "11cm",
         12: "12cm (8m gefreesde balken)",
-        13: "13cm"
+        13: "13cm",
+        14: "14cm",
+        15: "15cm"
     }[x],
     index=0
 )
 radius = diameter / 2
 aantal_buizen_breedte = st.number_input("Aantal balken in breedte", min_value=1, step=1, value=5)
 aantal_buizen_hoogte = st.number_input("Aantal balken in hoogte", min_value=1, step=1, value=5)
+# Radiobutton for selecting box/container dimensions
+box_option = st.radio(
+    "Selecteer vak/container type",
+    options=["Container Mamba (235 x 239.3 cm)", "Container Sneeuwuil (250 x 240 cm)", "Aangepast"]
+)
+
+if box_option == "Standaard (235 x 239.3 cm)":
+    box_width = st.number_input("Vak/container breedte (cm)", min_value=1.0, step=0.1, value=235.0, disabled=True)
+    box_height = st.number_input("Vak/container hoogte (cm)", min_value=1.0, step=0.1, value=239.3, disabled=True)
+elif box_option == "Container B (250 x 240 cm)":
+    box_width = st.number_input("Vak/container breedte (cm)", min_value=1.0, step=0.1, value=250.0, disabled=True)
+    box_height = st.number_input("Vak/container hoogte (cm)", min_value=1.0, step=0.1, value=240.0, disabled=True)
+else:
+    box_width = st.number_input("Vak/container breedte (cm)", min_value=1.0, step=0.1, value=235.0)
+    box_height = st.number_input("Vak/container hoogte (cm)", min_value=1.0, step=0.1, value=239.3)
 
 # Berekeningen
 breedte = 2 * radius * aantal_buizen_breedte
@@ -39,10 +58,6 @@ ax.set_ylim(-4, 300)  # Stel vaste y-as in van 0 tot 300 cm
 # Aslabels toevoegen met eenheden
 ax.set_xlabel("Breedte (cm)")
 ax.set_ylabel("Hoogte (cm)")
-
-# Define box dimensions
-box_width = 235
-box_height = 239.3
 
 # Add a rectangle to the plot representing the box
 rect = plt.Rectangle((0, 0), box_width, box_height, linewidth=1, edgecolor='r', facecolor='none')
