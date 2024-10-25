@@ -23,21 +23,28 @@ diameter = st.radio(
 radius = diameter / 2
 aantal_buizen_breedte = st.number_input("Aantal balken in breedte", min_value=1, step=1, value=5)
 aantal_buizen_hoogte = st.number_input("Aantal balken in hoogte", min_value=1, step=1, value=5)
+
+
 # Radiobutton for selecting box/container dimensions
+option = [
+    "Standaard (binnenmaten: 235 x 239.3 cm)", 
+    "Container offerte 2015 (binnenmaten: 238 x 220 cm)", 
+    "Aangepast"
+]
 box_option = st.radio(
     "Selecteer vak/container type",
-    options=["Container Mamba (235 x 239.3 cm)", "Container Sneeuwuil (250 x 240 cm)", "Aangepast"]
+    options=option,
 )
 
-if box_option == "Standaard (235 x 239.3 cm)":
-    box_width = st.number_input("Vak/container breedte (cm)", min_value=1.0, step=0.1, value=235.0, disabled=True)
-    box_height = st.number_input("Vak/container hoogte (cm)", min_value=1.0, step=0.1, value=239.3, disabled=True)
-elif box_option == "Container B (250 x 240 cm)":
-    box_width = st.number_input("Vak/container breedte (cm)", min_value=1.0, step=0.1, value=250.0, disabled=True)
-    box_height = st.number_input("Vak/container hoogte (cm)", min_value=1.0, step=0.1, value=240.0, disabled=True)
+if box_option == option[0]:
+    box_width = st.number_input("Vak/container breedte (cm)", min_value=1.0, step=1, value=235.0, disabled=True)
+    box_height = st.number_input("Vak/container hoogte (cm)", min_value=1.0, step=1, value=239.3, disabled=True)
+elif box_option == option[1]:
+    box_width = st.number_input("Vak/container breedte (cm)", min_value=1.0, step=1, value=238.0, disabled=True)
+    box_height = st.number_input("Vak/container hoogte (cm)", min_value=1.0, step=1, value=220.0, disabled=True)
 else:
-    box_width = st.number_input("Vak/container breedte (cm)", min_value=1.0, step=0.1, value=235.0)
-    box_height = st.number_input("Vak/container hoogte (cm)", min_value=1.0, step=0.1, value=239.3)
+    box_width = st.number_input("Vak/container breedte (cm)", min_value=1.0, step=1, value=235.0)
+    box_height = st.number_input("Vak/container hoogte (cm)", min_value=1.0, step=1, value=239.3)
 
 # Berekeningen
 breedte = 2 * radius * aantal_buizen_breedte
