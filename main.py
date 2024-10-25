@@ -5,7 +5,7 @@ import streamlit as st
 
 # Streamlit UI voor interactieve parameterselectie
 st.title("Interactieve Balkenstapel visualisatie")
-diameter = st.slider("Diameter van balk (cm)", 8, 16, 10)  # standaard 10 cm
+diameter = st.radio("Diameter van balk (cm)", options=[10, 11, 12, 13], index=0)  # standaard 10 cm
 radius = diameter / 2
 aantal_buizen_breedte = st.number_input("Aantal balken in breedte", min_value=1, step=1, value=5)
 aantal_buizen_hoogte = st.number_input("Aantal balken in hoogte", min_value=1, step=1, value=5)
