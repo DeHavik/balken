@@ -8,7 +8,6 @@ st.session_state.setdefault("box_height", 239.3)
 st.session_state.setdefault("maximaliseer_breedte", False)
 st.session_state.setdefault("maximaliseer_hoogte", False)
 
-
 # Streamlit UI voor interactieve parameterselectie
 st.title("Balken stapelen")
 diameters = {
@@ -93,7 +92,16 @@ with col2:
         st.session_state.maximaliseer_hoogte = maximaliseer_hoogte
         st.rerun()
 
-
+# Update Matplotlib font settings to match Streamlit
+plt.rcParams.update({
+    "font.size": 12,
+    "font.family": "sans-serif",
+    "font.sans-serif": ["Arial", "DejaVu Sans", "Liberation Sans", "sans-serif"],
+    "axes.labelsize": 14,
+    "axes.titlesize": 16,
+    "xtick.labelsize": 10,
+    "ytick.labelsize": 10
+})
 
 # Berekeningen
 breedte = 2 * radius * aantal_buizen_breedte
@@ -112,18 +120,17 @@ st.markdown("---")
 # Visualisatie met Matplotlib
 fig, ax = plt.subplots(figsize=(8, 8))  # Vaste figuurgrootte voor consistente schaal
 ax.set_aspect('equal', adjustable='datalim')
-ax.set_xlim(-1, 300)  # Stel vaste x-as in van 0 tot 300 cm
-ax.set_ylim(-4, 300)  # Stel vaste y-as in van 0 tot 300 cm
-
+ax.set_xlim(-5, 300)  # Stel vaste x-as in van 0 tot 300 cm
+ax.set_ylim(-5, 300)  # Stel vaste y-as in van 0 tot 300 cm
 # Add the total number of beams to the plot
-ax.text(0.5, 1.05, f"Totaal Aantal: {totaal_aantal}", transform=ax.transAxes, ha='center', va='center', fontsize=12, color='black', fontweight='bold')
+ax.text(0.5, 1.05, f"Totaal: {totaal_aantal} balken", transform=ax.transAxes, ha='center', va='center', fontsize=12, color='black', fontweight='bold')
 
 # Aslabels toevoegen met eenheden
 ax.set_xlabel("Breedte (cm)")
 ax.set_ylabel("Hoogte (cm)")
 
 # Add a rectangle to the plot representing the box
-rect = plt.Rectangle((0, 0), box_width, box_height, linewidth=1, edgecolor='r', facecolor='none')
+rect = plt.Rectangle((-0.5, 0), box_width, box_height, linewidth=1, edgecolor='r', facecolor='none')
 ax.add_patch(rect)
 
 # Cirkelplot in een hexagonaal stapelpatroon
