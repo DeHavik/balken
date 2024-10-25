@@ -21,13 +21,11 @@ diameter = st.radio(
     index=0
 )
 radius = diameter / 2
-aantal_buizen_breedte = st.number_input("Aantal balken in breedte", min_value=1, step=1, value=5)
-aantal_buizen_hoogte = st.number_input("Aantal balken in hoogte", min_value=1, step=1, value=5)
 
 
 # Radiobutton for selecting box/container dimensions
 option = [
-    "Standaard (binnenmaten: 235 x 239.3 cm)", 
+    "Standaard container (binnenmaten: 235 x 239.3 cm)", 
     "Container offerte 2015 (binnenmaten: 238 x 220 cm)", 
     "Aangepast"
 ]
@@ -45,6 +43,22 @@ elif box_option == option[1]:
 else:
     box_width = st.number_input("Vak/container breedte (cm)", min_value=1.0, step=1.0, value=235.0)
     box_height = st.number_input("Vak/container hoogte (cm)", min_value=1.0, step=1.0, value=239.3)
+
+col1, col2 = st.columns(2)
+maximaliseer = st.checkbox("Maximaliseer aantal balken")
+
+if maximaliseer:
+    aantal_buizen_breedte = max(1, int(box_width // (2 * radius)))
+    aantal_buizen_hoogte = max(1, int((box_height - 2 * radius) // (math.sqrt(3) * radius) + 1))
+    with col1:
+        st.number_input("Aantal balken in breedte", min_value=1, step=1, value=aantal_buizen_breedte, disabled=True)
+    with col2:
+        st.number_input("Aantal balken in hoogte", min_value=1, step=1, value=aantal_buizen_hoogte, disabled=True)
+else:
+    with col1:
+        aantal_buizen_breedte = st.number_input("Aantal balken in breedte", min_value=1, step=1, value=5)
+    with col2:
+        aantal_buizen_hoogte = st.number_input("Aantal balken in hoogte", min_value=1, step=1, value=5)
 
 # Berekeningen
 breedte = 2 * radius * aantal_buizen_breedte
