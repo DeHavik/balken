@@ -4,7 +4,7 @@ import math
 import streamlit as st
 
 # Streamlit UI voor interactieve parameterselectie
-st.title("Interactieve Balkenstapel visualisatie")
+st.title("Interactieve balkenstapel visualisatie")
 diameter = st.radio(
     "Diameter van balk (cm)", 
     options=[10, 11, 12, 13], 
@@ -34,11 +34,19 @@ st.write(f"**Totaal Aantal**: {totaal_aantal}")
 fig, ax = plt.subplots(figsize=(8, 8))  # Vaste figuurgrootte voor consistente schaal
 ax.set_aspect('equal', adjustable='datalim')
 ax.set_xlim(-1, 300)  # Stel vaste x-as in van 0 tot 300 cm
-ax.set_ylim(-1, 300)  # Stel vaste y-as in van 0 tot 300 cm
+ax.set_ylim(-4, 300)  # Stel vaste y-as in van 0 tot 300 cm
 
 # Aslabels toevoegen met eenheden
 ax.set_xlabel("Breedte (cm)")
 ax.set_ylabel("Hoogte (cm)")
+
+# Define box dimensions
+box_width = 235
+box_height = 239.3
+
+# Add a rectangle to the plot representing the box
+rect = plt.Rectangle((0, 0), box_width, box_height, linewidth=1, edgecolor='r', facecolor='none')
+ax.add_patch(rect)
 
 # Cirkelplot in een hexagonaal stapelpatroon
 for rij in range(aantal_buizen_hoogte):
@@ -51,4 +59,5 @@ for rij in range(aantal_buizen_hoogte):
             cirkel = plt.Circle((x_offset, y_offset), radius, edgecolor="blue", fill=False)
             ax.add_patch(cirkel)
 
+# Display the plot with the added rectangle
 st.pyplot(fig)
