@@ -37,14 +37,14 @@ box_option = st.radio(
 )
 
 if box_option == option[0]:
-    box_width = st.number_input("Vak/container breedte (cm)", min_value=1.0, step=1, value=235.0, disabled=True)
-    box_height = st.number_input("Vak/container hoogte (cm)", min_value=1.0, step=1, value=239.3, disabled=True)
+    box_width = st.number_input("Vak/container breedte (cm)", min_value=1.0, step=1.0, value=235.0, disabled=True)
+    box_height = st.number_input("Vak/container hoogte (cm)", min_value=1.0, step=1.0, value=239.3, disabled=True)
 elif box_option == option[1]:
-    box_width = st.number_input("Vak/container breedte (cm)", min_value=1.0, step=1, value=238.0, disabled=True)
-    box_height = st.number_input("Vak/container hoogte (cm)", min_value=1.0, step=1, value=220.0, disabled=True)
+    box_width = st.number_input("Vak/container breedte (cm)", min_value=1.0, step=1.0, value=238.0, disabled=True)
+    box_height = st.number_input("Vak/container hoogte (cm)", min_value=1.0, step=1.0, value=220.0, disabled=True)
 else:
-    box_width = st.number_input("Vak/container breedte (cm)", min_value=1.0, step=1, value=235.0)
-    box_height = st.number_input("Vak/container hoogte (cm)", min_value=1.0, step=1, value=239.3)
+    box_width = st.number_input("Vak/container breedte (cm)", min_value=1.0, step=1.0, value=235.0)
+    box_height = st.number_input("Vak/container hoogte (cm)", min_value=1.0, step=1.0, value=239.3)
 
 # Berekeningen
 breedte = 2 * radius * aantal_buizen_breedte
