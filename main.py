@@ -53,7 +53,6 @@ if option == options[0]:
         box_height = st.number_input("Vak/container hoogte (cm)", min_value=1, step=1, value=239, disabled=True)
         st.session_state.box_height = box_height
 elif option == options[1]:
-    st.write("option[1]")
     with col1:
         box_width = st.number_input("Vak/container breedte (cm)", min_value=1, step=1, value=238, disabled=True)
         st.session_state.box_width = box_width
