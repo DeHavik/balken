@@ -3,10 +3,12 @@ import matplotlib.pyplot as plt
 import math
 import streamlit as st
 
-st.session_state.setdefault("box_width", 235.0)
-st.session_state.setdefault("box_height", 239.3)
+st.session_state.setdefault("box_width", 235)
+st.session_state.setdefault("box_height", 239)
 st.session_state.setdefault("maximaliseer_breedte", False)
 st.session_state.setdefault("maximaliseer_hoogte", False)
+st.session_state.setdefault("max_breedte", 5)
+st.session_state.setdefault("max_hoogte", 5)
 
 # Streamlit UI voor interactieve parameterselectie
 st.title("Balken stapelen")
@@ -33,7 +35,7 @@ st.markdown("---")
 
 # Radiobutton for selecting box/container dimensions
 options = [
-    "Standaard container (binnenmaten: 235 x 239 cm)",
+    "Standaard container (binnenmaten: 235 x 239 cm)", # actually 239,3 cm
     "Container offerte 2015 (binnenmaten: 238 x 220 cm)",
     "Aangepast",
 ]
@@ -70,9 +72,10 @@ with col1:
     maximaliseer_breedte = st.session_state.maximaliseer_breedte
     if maximaliseer_breedte:
         aantal_buizen_breedte = max(1, int(box_width // (2 * radius)))
+        st.session_state.max_breedte = aantal_buizen_breedte
         st.number_input("Aantal balken in de breedte", min_value=1, step=1, value=aantal_buizen_breedte, disabled=True)
     else:
-        aantal_buizen_breedte = st.number_input("Aantal balken in de breedte", min_value=1, step=1, value=5)
+        aantal_buizen_breedte = st.number_input("Aantal balken in de breedte", min_value=1, step=1, value=st.session_state.max_breedte)
     maximaliseer_breedte = st.checkbox("Maximaliseer in breedte")
     if st.session_state.maximaliseer_breedte != maximaliseer_breedte:
         #trigger update ui
@@ -83,9 +86,10 @@ with col2:
     maximaliseer_hoogte = st.session_state.maximaliseer_hoogte
     if maximaliseer_hoogte:
         aantal_buizen_hoogte = max(1, int(box_height // (math.sqrt(3) * radius)))
+        st.session_state.max_hoogte = aantal_buizen_hoogte
         st.number_input("Aantal balken in de hoogte", min_value=1, step=1, value=aantal_buizen_hoogte, disabled=True)
     else:
-        aantal_buizen_hoogte = st.number_input("Aantal balken in de hoogte", min_value=1, step=1, value=5)
+        aantal_buizen_hoogte = st.number_input("Aantal balken in de hoogte", min_value=1, step=1, value=st.session_state.max_hoogte)
     maximaliseer_hoogte = st.checkbox("Maximaliseer in hoogte")
     if st.session_state.maximaliseer_hoogte != maximaliseer_hoogte:
         #trigger update ui
