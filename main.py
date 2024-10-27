@@ -70,32 +70,22 @@ st.markdown("---")
 
 col1, col2 = st.columns(2)
 with col1:
-    maximaliseer_breedte = st.session_state.maximaliseer_breedte
+    maximaliseer_breedte = st.checkbox("Maximaliseer in breedte")
     if maximaliseer_breedte:
         aantal_buizen_breedte = max(1, int(box_width // (2 * radius)))
-        st.session_state.max_breedte = aantal_buizen_breedte
         st.number_input("Aantal balken in de breedte", min_value=1, step=1, value=aantal_buizen_breedte, disabled=True)
+        st.session_state.max_breedte = aantal_buizen_breedte
     else:
         aantal_buizen_breedte = st.number_input("Aantal balken in de breedte", min_value=1, step=1, value=st.session_state.max_breedte)
-    maximaliseer_breedte = st.checkbox("Maximaliseer in breedte")
-    if st.session_state.maximaliseer_breedte != maximaliseer_breedte:
-        #trigger update ui
-        st.session_state.maximaliseer_breedte = maximaliseer_breedte
-        st.rerun()
 
 with col2:
-    maximaliseer_hoogte = st.session_state.maximaliseer_hoogte
+    maximaliseer_hoogte = st.checkbox("Maximaliseer in hoogte")
     if maximaliseer_hoogte:
-        aantal_buizen_hoogte = max(1, int(box_height // (math.sqrt(3) * radius)))
-        st.session_state.max_hoogte = aantal_buizen_hoogte
+        aantal_buizen_hoogte = max(0, int((box_height - 2 * radius) // (math.sqrt(3) * radius))) + 1
         st.number_input("Aantal balken in de hoogte", min_value=1, step=1, value=aantal_buizen_hoogte, disabled=True)
+        st.session_state.max_hoogte = aantal_buizen_hoogte
     else:
         aantal_buizen_hoogte = st.number_input("Aantal balken in de hoogte", min_value=1, step=1, value=st.session_state.max_hoogte)
-    maximaliseer_hoogte = st.checkbox("Maximaliseer in hoogte")
-    if st.session_state.maximaliseer_hoogte != maximaliseer_hoogte:
-        #trigger update ui
-        st.session_state.maximaliseer_hoogte = maximaliseer_hoogte
-        st.rerun()
 
 # Update Matplotlib font settings to match Streamlit
 plt.rcParams.update({
