@@ -35,8 +35,8 @@ st.markdown("---")
 
 # Radiobutton for selecting box/container dimensions
 options = [
-    "Standaard container (binnenmaten: 235 x 239 cm)", # actually 239,3 cm
-    "Container offerte 2015 (binnenmaten: 238 x 220 cm)",
+    "Standaard container (binnenmaten: 235cm x 239cm)", # actually 239,3 cm
+    "Container offerte 2015 (binnenmaten: 238cm x 220cm)",
     "Aangepast",
 ]
 option = st.radio(
